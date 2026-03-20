@@ -1,0 +1,29 @@
+# OpenInference2API Configuration
+# VibeDuel API reverse proxy with auto-refill
+
+# Server configuration
+server:
+  host: "0.0.0.0"
+  port: 8080
+
+# Upstream VibeDuel API configuration
+upstream:
+  base_url: "https://api.vibeduel.ai/v1"
+  api_key: ""  # VIBEDUEL_API_KEY - set via environment variable VIBEDUEL_API_KEY
+
+# Downstream API key for clients to authenticate
+# Clients must provide this key in Authorization header
+downstream:
+  api_key: ""  # Set via environment variable DOWNSTREAM_API_KEY
+
+# Auto-refill configuration
+auto_refill:
+  enabled: true
+  # Trigger refill when credits fall below this threshold
+  threshold: 60
+  # Target credits after refill (leave empty to just add 50)
+  target_credits: 100
+  # Check interval in milliseconds (default: 30 seconds)
+  check_interval_ms: 30000
+  # Maximum refills per session to prevent infinite loops
+  max_refills_per_session: 5
